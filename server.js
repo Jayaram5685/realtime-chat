@@ -4,12 +4,14 @@ const http = require('http');
 const path = require('path');
 const express = require('express');
 const { Server } = require('socket.io');
+const fs = require('fs');
 
 const PORT = process.env.PORT || 3000;
 const HISTORY = 80;         // messages kept per room
 const MAX_LEN = 800;        // max chars per message
 const RATE = 5;             // max msgs in window
 const RATE_WINDOW = 5000;   // ms
+const DATA_FILE = path.join(__dirname, 'data.json');
 
 const app = express();
 const server = http.createServer(app);
@@ -83,6 +85,12 @@ io.on('connection', (socket) => {
   socket.on('typing', () => {
     if (socket.data.room) {
       socket.to(socket.data.room).emit('typing', { user: socket.data.name });
+    }
+  });
+
+  socket.on('typing-stop', () => {
+    if (socket.data.room) {
+      socket.to(socket.data.room).emit('typing-stop');
     }
   });
 
