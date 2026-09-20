@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RealtimeChat</title>
+<meta name="description" content="RealtimeChat — a multi-room WebSocket chat app with typing indicators and live presence.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+  <header class="topbar">
+    <div class="brand">realtime<span>chat</span></div>
+    <div class="top-actions">
+      <input id="nameInput" class="name-input" maxlength="24" placeholder="Your name">
+      <button id="presenceBtn" class="ghost" title="People online">● <b id="online">0</b> online</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <label for="roomInput" class="tiny">ROOM</label>
+      <div class="room-row">
+        <input id="roomInput" placeholder="e.g. marketing" maxlength="40">
+        <button id="joinBtn">Join</button>
+      </div>
+      <div class="current" id="currentRoom">general</div>
+      <div class="tiny">ONLINE</div>
+      <ul id="userList" class="users"></ul>
+    </aside>
+
+    <main class="chat">
+      <div id="messages" class="messages"></div>
+
+      <div class="typing" id="typing" hidden><span class="dots"><i></i><i></i><i></i></span><span id="typingText"></span></div>
+
+      <form id="msgForm" class="composer">
+        <input id="msgInput" type="text" placeholder="Type a message…" maxlength="800" autocomplete="off" autofocus>
+        <button type="submit">Send</button>
+      </form>
+    </main>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="chat.js"></script>
+</body>
+</html>

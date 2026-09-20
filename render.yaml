@@ -1,0 +1,16 @@
+# Render blueprint — RealtimeChat
+# Import this repo in Render → Blueprints, or create a Web Service manually:
+#   Build command:  (none)
+#   Start command:  npm start
+# Health check path: /
+services:
+  - type: web
+    name: realtime-chat
+    runtime: node
+    plan: free
+    envVars:
+      - key: PORT
+        value: "10000"
+    healthCheckPath: /
+    startCommand: npm start
+    buildCommand: ""
